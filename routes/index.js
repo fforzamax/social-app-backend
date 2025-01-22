@@ -1,0 +1,23 @@
+const express = require("express");
+const router = express.Router();
+const multer = require("multer");
+
+const uploadDestination = "uploads";
+
+// Показываем, где хранить файлы
+const storage = multer.diskStorage({
+  destination: uploadDestination,
+  filename: function (req, file, next) {
+    next(null, file.originalname);
+  },
+});
+
+const upload = multer({
+  storage: storage,
+});
+
+router.get("/register", (req, res) => {
+  res.send("OK");
+});
+
+module.exports = router;
